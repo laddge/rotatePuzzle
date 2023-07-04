@@ -34,20 +34,21 @@ const createData = () => {
       [x, y + 1],
       [x - 1, y],
     ]
+    const idx = [
+      getIndex(data, crds[0]),
+      getIndex(data, crds[1]),
+      getIndex(data, crds[2]),
+      getIndex(data, crds[3]),
+    ]
     for (let d: number = 0; d < 4; d++) {
-      if (getIndex(data, crds[d]) == -1) continue
-      const idx = [
-        getIndex(data, crds[(d + 1) % 4]),
-        getIndex(data, crds[(d + 2) % 4]),
-        getIndex(data, crds[(d + 3) % 4]),
-      ]
-      if (idx[0] != -1) {
-        data[idx[0]] = crds[d]
+      if (idx[d] == -1) continue
+      if (idx[(d + 1) % 4] != -1) {
+        data[idx[d]] = crds[(d + 1) % 4]
       } else {
-        if (idx[1] != -1) {
-          data[idx[1]] = crds[d]
+        if (idx[(d + 2) % 4] != -1) {
+          data[idx[d]] = crds[(d + 2) % 4]
         } else {
-          data[idx[2]] = crds[d]
+          data[idx[d]] = crds[(d + 3) % 4]
         }
       }
     }
